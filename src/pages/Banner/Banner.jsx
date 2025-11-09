@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
@@ -13,12 +14,12 @@ const Banner = () => {
             Explore new flavors, cooking tips, and meal inspiration for every
             occasion.
           </p>
-          <a
-            href="/products"
+          <Link
+            href="/recipes"
             className="inline-block bg-white text-red-500 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition"
           >
             Explore Recipes
-          </a>
+          </Link>
         </div>
 
         {/* Image or Illustration */}
