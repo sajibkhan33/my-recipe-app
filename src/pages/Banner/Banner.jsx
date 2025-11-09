@@ -15,7 +15,7 @@ const Banner = () => {
             occasion.
           </p>
           <Link
-            href="/recipes"
+            to="/recipes"
             className="inline-block bg-white text-red-500 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition"
           >
             Explore Recipes
