@@ -9,10 +9,14 @@ const Recipe = ({ item }) => {
   const isInCart = cartItems.find((cartItem) => cartItem.id === id);
 
   return (
-    <div className="max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden m-4 flex flex-col hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+    <div className="max-w-sm bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
       {/* Recipe Image */}
-      <div className="relative">
-        <img src={image} alt={name} className="h-52 w-full object-cover" />
+      <div className="relative w-full aspect-[4/3]">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover rounded-t-3xl"
+        />
         <div className="absolute top-2 right-2 bg-white/80 rounded-full px-3 py-1 text-sm font-semibold shadow-md">
           {cuisine}
         </div>
@@ -37,7 +41,7 @@ const Recipe = ({ item }) => {
           {tags?.map((tag, i) => (
             <span
               key={i}
-              className="text-xs bg-linear-to-r from-green-100 via-blue-100 to-purple-100 text-gray-800 px-3 py-1 rounded-full shadow-sm"
+              className="text-xs bg-gradient-to-r from-green-100 via-blue-100 to-purple-100 text-gray-800 px-3 py-1 rounded-full shadow-sm"
             >
               {tag}
             </span>
