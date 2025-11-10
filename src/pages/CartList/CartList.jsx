@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { clearAllItem, removeItem } from "../../redux/slice";
+import { clearAllItem, removeItem, updateQuantity } from "../../redux/slice";
 
 const CartList = () => {
   const cartSelector = useSelector((state) => state.cart.items);
-  const [cartItems, setCartItems] = useState(cartSelector);
+  // const [cartItems, setCartItems] = useState(cartSelector);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setCartItems(cartSelector);
-  }, [cartSelector]);
+  // useEffect(() => {
+  //   setCartItems(cartSelector);
+  // }, [cartSelector]);
 
+  // const manageQuantity = (id, q) => {
+  //   let quantity = parseInt(q) > 1 ? parseInt(q) : 1;
+  //   const cartTempItems = cartSelector.map((item) => {
+  //     return item.id === id ? { ...item, quantity } : item;
+  //   });
+  //   setCartItems(cartTempItems);
+  // };
   const manageQuantity = (id, q) => {
-    let quantity = parseInt(q) > 1 ? parseInt(q) : 1;
-    const cartTempItems = cartSelector.map((item) =>
-      item.id === id ? { ...item, quantity } : item
-    );
-    setCartItems(cartTempItems);
+    let quantity = parseInt(q);
+    if (isNaN(quantity) || quantity < 1) quantity = 1;
+    dispatch(updateQuantity({ id, quantity }));
   };
 
   const handlePlaceOrder = () => {
@@ -29,7 +34,11 @@ const CartList = () => {
     navigate("/");
   };
 
-  const total = cartItems.reduce(
+  // const total = cartItems.reduce(
+  //   (sum, item) => sum + item.userId * (item.quantity || 1),
+  //   0
+  // );
+  const total = cartSelector.reduce(
     (sum, item) => sum + item.userId * (item.quantity || 1),
     0
   );
@@ -42,12 +51,12 @@ const CartList = () => {
     <div className="max-w-5xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-2">Your Cart Items</h2>
       <span className="text-gray-600 mb-4 block">
-        ({cartItems.length} {cartItems.length === 1 ? "item" : "items"})
+        ({cartSelector.length} {cartSelector.length === 1 ? "item" : "items"})
       </span>
 
       {cartSelector.length > 0 ? (
         <div className="space-y-6">
-          {cartItems.map((item) => (
+          {cartSelector.map((item) => (
             <div
               key={item.id}
               className="flex flex-col md:flex-row justify-between items-center bg-white shadow rounded-lg p-4"
